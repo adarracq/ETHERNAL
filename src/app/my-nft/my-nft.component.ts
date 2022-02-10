@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MynftsService } from '../services/mynfts.service';
 
 @Component({
   selector: 'app-my-nft',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./my-nft.component.scss']
 })
 export class MyNftComponent implements OnInit {
+  loaded = false;
+  empty = false;
+  nfts : any;
 
-  constructor() { }
+  constructor(private myNFTsservice: MynftsService) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    await this.myNFTsservice.LoadNFTs();
+    this.loaded = await this.myNFTsservice.loadingState;
+    this.nfts = await this.myNFTsservice.nfts;
+
+    if(this.nfts.lentgh == 0 || this.nfts.length == null) {
+      this.empty = true;
+    }
   }
 
 }

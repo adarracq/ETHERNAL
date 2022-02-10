@@ -1,0 +1,19 @@
+<h1 *ngIf="empty" class="title">No assets created</h1>
+<div class="nfts" *ngIf="!empty">
+    <p> Items Created</p>
+    <div class="created" *ngFor="let nft of nfts">
+        <div class="card" *ngIf=!nft.sold>
+            <img class="img" src={{nft.image}}/>
+            <p class="subtitle">{{nft.price}} ETH</p>
+        </div>
+    </div>
+
+    <p>Items sold</p>
+    <div class="sold" *ngFor="let nft of nfts">
+        <div class="card" *ngIf=nft.sold>
+            <img class="img" src={{nft.image}}/>
+            <p class="subtitle">{{nft.price}} ETH</p>
+        </div>
+    </div>
+
+</div>

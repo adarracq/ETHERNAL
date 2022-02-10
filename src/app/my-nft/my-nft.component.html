@@ -1,1 +1,9 @@
-<p>my-nft works!</p>
+<h1 *ngIf="empty" class="title">No items owned</h1>
+<div class="nfts" *ngIf="!empty">
+
+        <div class="nft" *ngFor="let nft of nfts">
+            <img class="img" src={{nft.image}}/>
+            <p class="subtitle">{{nft.price}} ETH</p>
+        </div>
+
+</div>

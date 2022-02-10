@@ -7,8 +7,8 @@ import { IpfsService } from './services/ipfs.service';
 import { HomeComponent } from './home/home.component';
 import { MintNFTComponent } from './mint-nft/mint-nft.component';
 import { MyNftComponent } from './my-nft/my-nft.component';
-import { SellNFTComponent } from './sell-nft/sell-nft.component';
 import { NavComponent } from './nav/nav.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -16,8 +16,8 @@ import { NavComponent } from './nav/nav.component';
     HomeComponent,
     MintNFTComponent,
     MyNftComponent,
-    SellNFTComponent,
-    NavComponent
+    NavComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

@@ -58,9 +58,9 @@ export class MintService {
     const price = ethers.utils.parseUnits(this.formInput.price, 'ether');
 
     /* then list the item for sale on the marketplace */
-    contract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
-    let listingPrice = await contract.getListingPrice()
-    listingPrice = listingPrice.toString()
+    contract = new ethers.Contract(nftmarketaddress, Market.abi, signer);
+    let listingPrice = await contract.getListingPrice();
+    listingPrice = listingPrice.toString();
 
     transaction = await contract.createMarketItem(nftaddress, tokenId, price, { value: listingPrice });
     await transaction.wait();

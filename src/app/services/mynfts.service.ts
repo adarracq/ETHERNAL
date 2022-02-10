@@ -11,15 +11,22 @@ import Market from '../../../artifacts/contracts/Market.sol/NFTMarket.json';
 @Injectable({
   providedIn: 'root'
 })
-export class HomeService {
+export class MynftsService {
   nfts : any;
   loadingState = false;
 
   LoadNFTs = async () => {
-    const provider = new ethers.providers.JsonRpcProvider();
+    const web3Modal = new Web3Modal({
+      network: "mainnet",
+      cacheProvider: true,
+    });
+    const connection = await web3Modal.connect();
+    const provider = new ethers.providers.Web3Provider(connection);
+    const signer = provider.getSigner();
+
+    const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, signer);
     const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider);
-    const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, provider);
-    const data = await marketContract.fetchMarketItems();
+    const data = await marketContract.fetchMyNFTs();
 
     /*
     *  map over items returned from smart contract and format 
@@ -44,20 +51,4 @@ export class HomeService {
     this.loadingState = true;
   };
 
-  async buyNFT(nft : any) {
-    /* needs the user to sign the transaction, so will use Web3Provider and sign it */
-    const web3Modal = new Web3Modal();
-    const connection = await web3Modal.connect();
-    const provider = new ethers.providers.Web3Provider(connection);
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(nftmarketaddress, Market.abi, signer);
-
-    /* user will be prompted to pay the asking proces to complete the transaction */
-    const price = ethers.utils.parseUnits(nft.price.toString(), 'ether');
-    const transaction = await contract.createMarketSale(nftaddress, nft.tokenId, {
-      value: price
-    })
-    await transaction.wait();
-    this.LoadNFTs();
-  }
 }

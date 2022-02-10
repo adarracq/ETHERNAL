@@ -8,23 +8,29 @@ import {nftaddress, nftmarketaddress} from '../../../config';
 import NFT from '../../../artifacts/contracts/NFT.sol/NFT.json';
 import Market from '../../../artifacts/contracts/Market.sol/NFTMarket.json';
 
+
 @Injectable({
   providedIn: 'root'
 })
-export class HomeService {
+export class DashboardService {
+
   nfts : any;
   loadingState = false;
 
   LoadNFTs = async () => {
-    const provider = new ethers.providers.JsonRpcProvider();
-    const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider);
-    const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, provider);
-    const data = await marketContract.fetchMarketItems();
 
-    /*
-    *  map over items returned from smart contract and format 
-    *  them as well as fetch their token metadata
-    */
+    const web3Modal = new Web3Modal({
+      network: "mainnet",
+      cacheProvider: true,
+    });
+    const connection = await web3Modal.connect();
+    const provider = new ethers.providers.Web3Provider(connection);
+    const signer = provider.getSigner();
+
+    const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, signer);
+    const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider);
+    const data = await marketContract.fetchItemsCreated();
+
     const items = await Promise.all(data.map( async i  => {
       const tokenUri = await tokenContract.tokenURI(i.tokenId)
       const meta = await axios.get(tokenUri)
@@ -37,27 +43,11 @@ export class HomeService {
         image: meta.data.image,
         name: meta.data.name,
         description: meta.data.description,
+        sold: i.sold
       }
       return Promise.resolve(item);
     }));
     this.nfts = items;
     this.loadingState = true;
   };
-
-  async buyNFT(nft : any) {
-    /* needs the user to sign the transaction, so will use Web3Provider and sign it */
-    const web3Modal = new Web3Modal();
-    const connection = await web3Modal.connect();
-    const provider = new ethers.providers.Web3Provider(connection);
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(nftmarketaddress, Market.abi, signer);
-
-    /* user will be prompted to pay the asking proces to complete the transaction */
-    const price = ethers.utils.parseUnits(nft.price.toString(), 'ether');
-    const transaction = await contract.createMarketSale(nftaddress, nft.tokenId, {
-      value: price
-    })
-    await transaction.wait();
-    this.LoadNFTs();
-  }
 }

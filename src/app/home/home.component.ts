@@ -20,11 +20,21 @@ export class HomeComponent implements OnInit {
     this.loaded = await this.homeService.loadingState;
     this.nfts = await this.homeService.nfts;
 
+    for(var i = 0; i < this.nfts.length; i++) {
+      console.log(this.nfts[i]);
+    }
+
     if(this.nfts.lentgh == 0 || this.nfts.length == null) {
       this.empty = true;
     }
+  }
 
-
+  async buyNFT(nft: any) {
+    await this.homeService.buyNFT(nft);
+    await this.homeService.LoadNFTs();
+    if(this.nfts.lentgh == 0 || this.nfts.length == null) {
+      this.empty = true;
+    }
   }
 
 }
