@@ -1,1 +1,25 @@
 @import "../node_modules/bulma/bulma.sass";
+
+@font-face {
+    font-family: Zen-Light;
+    src: url(assets/fonts/Zen_Kaku_Gothic_Antique/ZenKakuGothicAntique-Light.ttf) format("opentype");
+}
+
+@font-face {
+    font-family: Zen-Regular;
+    src: url(assets/fonts/Zen_Kaku_Gothic_Antique/ZenKakuGothicAntique-Regular.ttf) format("opentype");
+}
+
+@font-face {
+    font-family: Zen-Bold;
+    src: url(assets/fonts/Zen_Kaku_Gothic_Antique/ZenKakuGothicAntique-Bold.ttf) format("opentype");
+}
+
+html {
+    background-color: #0d0f19;
+}
+body {
+    font-family: Zen-Light;
+    color: #8a8fb2;
+    background-color: #0d0f19;
+}

@@ -1,10 +1,42 @@
 <h1 *ngIf="empty" class="title">No items in marketplace</h1>
-<div class="nfts" *ngIf="!empty">
+<div class="home has-text-centered">
 
-        <div class="nft" *ngFor="let nft of nfts">
-            <img class="img" src={{nft.image}}/>
-            <p class="subtitle">{{nft.price}} ETH</p>
-            <button class="button" (click)="buyNFT(nft)">Buy</button>
+    <h1 class="title" id="marketplace">Marketplace</h1>
+
+    <div class="nfts" *ngIf="!empty">
+
+        <div class="columns">
+            <div class="column" *ngFor="let nft of nfts">
+                <div class="card">
+                    <div class="card-image">
+                    <figure class="image is-4by3">
+                        <img src={{nft.image}} alt="Placeholder image">
+                    </figure>
+                    </div>
+                    <div class="card-content">
+                    <div class="media">
+                        <div class="media-left">
+                        <figure class="image is-48x48">
+                            <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                        </figure>
+                        </div>
+                        <div class="media-content">
+                        <p class="title is-4">{{nft.name}}</p>
+                        <p class="subtitle is-6">Created by : Encre Orage</p>
+                        </div>
+                    </div>
+                
+                    <div class="content">
+                        {{nft.description}}
+                        <br>
+                        <p class="price">{{nft.price}} ETH</p>
+                    </div>
+                    </div>
+                    <footer class="card-footer">
+                        <a class="card-footer-item" (click)="buyNFT(nft)">Buy</a>
+                    </footer>
+                </div>
+            </div>
         </div>
 
 </div>
