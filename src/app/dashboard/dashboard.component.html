@@ -1,4 +1,4 @@
-<div class="mint has-text-centered">
+<div class="dashboard has-text-centered">
 
     <h1 class="title">Dashboard</h1>
 
@@ -6,7 +6,7 @@
   
    <h1 *ngIf="empty" class="title">No assets created</h1>
 
-    <div class="nfts">
+    <div class="nfts" *ngIf="!empty">
         <h1 class="title">Items created</h1>
         <div class="created" *ngFor="let nft of nfts">
             <div class="card" *ngIf=!nft.sold>

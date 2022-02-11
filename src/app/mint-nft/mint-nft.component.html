@@ -6,31 +6,33 @@
 
     <input 
     placeholder="Asset Name"
-    class="mt-8 border rounded p-4"
+    class="input"
     (change)="updateName($event)"
     />
+    <br>
     <input
     placeholder="Asset Description"
-    class="mt-2 border rounded p-4"
+    class="input"
     (change)="updateDescription($event)"
     />
+    <br>
     <input
     placeholder="Asset Price in Eth"
-    class="mt-2 border rounded p-4"
+    class="input"
     (change)="updatePrice($event)"
     />
+    <br>
     <input
     type="file"
     name="Asset"
     class="my-4"
     (change)="loadFile($event)"
     />
-    
-    <img *ngIf="fileUrl != null" class="rounded mt-4" width="350" src={{fileUrl}} />
-    
-    
-    <button (click)="createMarket()" class="font-bold mt-4 bg-pink-500 text-white rounded p-4 shadow-lg">
-    Create Digital Asset
-    </button>
+    <br>
+    <img *ngIf="fileUrl != null" src={{fileUrl}} id="preview"/>
+    <br>
+
+    <a class="button is-light is-outlined" (click)="createMarket()">Create Digital Asset</a>
+
 </div>
 
