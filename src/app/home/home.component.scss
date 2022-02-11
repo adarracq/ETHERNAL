@@ -1,12 +1,66 @@
-h1 {
+.title {
     font-family: Zen-Regular;
     color: #8a8fb2;
-}
-
-#marketplace {
     margin-top: 5vh;
 }
 
+.subtitle {
+    font-family: Zen-Bold;
+    color: #8a8fb2;
+}
+
+.input {
+    margin-bottom: 10px;
+}
+
+img {
+    object-fit: cover;
+}
+
 .card{
-    max-width: 400px;
+    background-color: #F8F8F8;
+}
+
+.card:hover{
+    background-color: black;
+    color: white;
+}
+
+.card-footer {
+    background-color: #0d0f19;
+}
+
+#filter_btn {
+    width: 100%;
+}
+
+.filters {
+    width: 100%;
+    border:0.5px solid white;
+    border-radius: 10px;
+    background-color: #F8F8F8;
+    color: black;
+    margin-bottom: 20px;
+}
+
+#filter_artists {
+    margin: 50px;
+}
+
+#filter_price {
+    margin: 50px;
+}
+
+#filter_date {
+    margin: 50px;
+}
+
+#search_input {
+    background-color: #F8F8F8;
+}
+
+.price {
+    font-family: Zen-Bold;
+    font-size: x-large;
+    color: #00b89a;
 }

@@ -9,6 +9,7 @@ import { MintNFTComponent } from './mint-nft/mint-nft.component';
 import { MyNftComponent } from './my-nft/my-nft.component';
 import { NavComponent } from './nav/nav.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     MintNFTComponent,
     MyNftComponent,
     NavComponent,
-    DashboardComponent
+    DashboardComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

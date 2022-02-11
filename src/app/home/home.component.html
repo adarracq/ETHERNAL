@@ -1,12 +1,103 @@
-<h1 *ngIf="empty" class="title">No items in marketplace</h1>
 <div class="home has-text-centered">
 
-    <h1 class="title" id="marketplace">Marketplace</h1>
+    <h1 class="title">Marketplace</h1>
+
+    <hr>
+
+    <div class="columns">
+
+        <div class="column is-one-quarter" id="filter">
+
+            <a class="button is-light is-outlined" id="filter_btn" (click)="openFilters()">
+                Filters
+            </a>
+
+        </div>
+
+        <div class="column is-one-quarter">
+            <div class="select" id="order">
+                <select (change)="sortNFTs($event.target.value)">
+                  <option (click)="sortNFTs(0)">Recent</option>
+                  <option (click)="sortNFTs(1)">Price : low to high</option>
+                  <option (click)="sortNFTs(2)">Price : high to low</option>
+                </select>
+              </div>
+        </div>
+
+        <div class="column is-half" id="search">
+            <input class="input" type="text" placeholder="Search" id="search_input">
+        </div>
+    </div>
+
+    <div class="filters" *ngIf="showFilters">
+        <div class="columns">
+            <div class="column" id="filter_artists">
+                <h2 class="subtitle">Artists</h2>
+                <div class="columns has-text-left">
+
+                    <div class="column">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            Encre Orage
+                        </label>
+                        <br>
+
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            Nicolas Lot
+                        </label>
+                        <br>
+
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            Grabeul
+                        </label>
+                    </div>
+
+                    <div class="column">
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            Encre Orage
+                        </label>
+                        <br>
+
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            Nicolas Lot
+                        </label>
+                        <br>
+
+                        <label class="checkbox">
+                            <input type="checkbox">
+                            Grabeul
+                        </label>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="column" id="filter_price">
+                <h2 class="subtitle">Price Range</h2>
+                <input class="input" type="text" placeholder="min">
+                <input class="input" type="text" placeholder="max">
+                <button class="button">Apply</button>
+                
+            </div>
+            <div class="column" id="filter_date">
+                <h2 class="subtitle">Date minted</h2>
+                <input class="input" type="date" placeholder="min">
+                <input class="input" type="date" placeholder="max">
+                <button class="button">Apply</button>
+            </div>
+        </div>
+        
+    </div>
 
     <div class="nfts" *ngIf="!empty">
 
-        <div class="columns">
-            <div class="column" *ngFor="let nft of nfts">
+        <div class="columns" *ngFor="let block of blocks">
+            <div class="column" *ngFor="let nft of block.nfts">
                 <div class="card">
                     <div class="card-image">
                     <figure class="image is-4by3">
@@ -20,7 +111,7 @@
                             <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
                         </figure>
                         </div>
-                        <div class="media-content">
+                        <div class="media-content has-text-left">
                         <p class="title is-4">{{nft.name}}</p>
                         <p class="subtitle is-6">Created by : Encre Orage</p>
                         </div>
@@ -29,11 +120,16 @@
                     <div class="content">
                         {{nft.description}}
                         <br>
-                        <p class="price">{{nft.price}} ETH</p>
+                        <h1 class="price is-2">{{nft.price}} ETH <br> {{nft.price * ethPrice | currency}}</h1>
                     </div>
                     </div>
                     <footer class="card-footer">
-                        <a class="card-footer-item" (click)="buyNFT(nft)">Buy</a>
+                        <a class="card-footer-item" (click)="viewNFT(nft)">
+                            <h2 class="subtitle">VIEW</h2>
+                        </a>
+                        <a class="card-footer-item" (click)="buyNFT(nft)">
+                            <h2 class="subtitle">BUY</h2>
+                        </a>
                     </footer>
                 </div>
             </div>

@@ -26,8 +26,8 @@ export class HomeService {
     *  them as well as fetch their token metadata
     */
     const items = await Promise.all(data.map( async i  => {
-      const tokenUri = await tokenContract.tokenURI(i.tokenId)
-      const meta = await axios.get(tokenUri)
+      const tokenUri = await tokenContract.tokenURI(i.tokenId);
+      const meta = await axios.get(tokenUri);
       let price = ethers.utils.formatUnits(i.price.toString(), 'ether')
       let item = {
         price,
@@ -37,6 +37,7 @@ export class HomeService {
         image: meta.data.image,
         name: meta.data.name,
         description: meta.data.description,
+        date: Math.round(new Date().getTime())
       }
       return Promise.resolve(item);
     }));

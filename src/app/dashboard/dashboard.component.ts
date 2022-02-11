@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
       console.log("sold : ", this.nfts[i].sold);
     }
 
-    if(this.nfts.lentgh == 0 || this.nfts.length == null) {
+    if(this.nfts.length == 0) {
       this.empty = true;
     }
   }

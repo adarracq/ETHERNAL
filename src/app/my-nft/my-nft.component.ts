@@ -18,7 +18,9 @@ export class MyNftComponent implements OnInit {
     this.loaded = await this.myNFTsservice.loadingState;
     this.nfts = await this.myNFTsservice.nfts;
 
-    if(this.nfts.lentgh == 0 || this.nfts.length == null) {
+
+    if(this.nfts.length == 0) {
+      console.log("coucou");
       this.empty = true;
     }
   }
